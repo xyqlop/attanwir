@@ -6,7 +6,7 @@ function PageLayout({ children }) {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <div className="main-pattern w-full min-h-screen bg-light dark:bg-dark font-montserrat pt-20 relative overflow-hidden">
+      <div className="main-pattern w-full min-h-screen bg-light dark:bg-dark font-montserrat pt-20 relative overflow-hidden px-0">
         {children}
       </div>
     </div>
