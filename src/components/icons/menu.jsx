@@ -4,7 +4,7 @@ export function Menu() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="size-8 text-light menu-btn"
+      className="menu-btn size-8 text-light"
     >
       <path
         fillRule="evenodd"
@@ -21,7 +21,7 @@ export function Close() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="size-8 text-light menu-btn"
+      className="menu-btn size-8 text-light"
     >
       <path
         fillRule="evenodd"
@@ -35,7 +35,7 @@ export function Close() {
 export function RightArrow() {
   return (
     <svg
-      ariaHidden="true"
+      aria-hidden="true"
       role="img"
       height="1em"
       width="1em"

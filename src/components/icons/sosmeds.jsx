@@ -1,7 +1,7 @@
 export function Instagram() {
   return (
     <svg
-      className="w-6 h-6 text-stone-400 dark:text-white"
+      className="h-6 w-6 text-stone-400 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -22,7 +22,7 @@ export function Instagram() {
 export function Youtube() {
   return (
     <svg
-      className="w-6 h-6 text-stone-400 dark:text-white"
+      className="h-6 w-6 text-stone-400 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -42,7 +42,7 @@ export function Youtube() {
 export function Facebook() {
   return (
     <svg
-      className="w-6 h-6 text-stone-400 dark:text-white"
+      className="h-6 w-6 text-stone-400 dark:text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

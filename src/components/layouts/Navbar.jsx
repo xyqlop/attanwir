@@ -8,6 +8,7 @@ function Navbar() {
   const location = useLocation();
   const links = ["Beranda", "Tentang", "Galeri", "Kontak"];
   const [showMenu, setShowMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleClickOutside = (e) => {
     if (
@@ -26,36 +27,57 @@ function Navbar() {
       window.removeEventListener("click", handleClickOutside);
     }
 
-    // Cleanup event listener on component unmount or when showMenu changes
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [showMenu]);
 
+  useEffect(() => {
+    location.pathname !== "/beranda" && setScrolled(true);
+  }, []);
+
+  console.log(location.pathname == "/beranda");
+
+  window.onscroll = () => {
+    if (location.pathname !== "/beranda") {
+      setScrolled(true);
+    } else if (window.scrollY > 50 || showMenu) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
   return (
     <nav>
-      <div className="flex justify-between items-center bg-primary fixed top-0 left-0 right-0 py-4 font-montserrat px-5 md:px-10 shadow-md dark:bg-[#344e41] z-50">
-        <div className="flex justify-center items-center gap-2">
-          <div className="size-10 inline-block">
+      <div
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between bg-primary px-5 py-4 font-montserrat md:px-10 ${scrolled ? "bg-primary shadow-md dark:bg-[#344e41]" : "bg-transparent"}`}
+      >
+        <div className="flex items-center justify-center gap-2">
+          <div className="inline-block size-10">
             <Link to="/">
               <img src={logo} alt="" />
             </Link>
           </div>
           <Link
             to="/"
-            className="text-2xl lg:text-3xl font-bold font-inter tracking-wider text-secondary dark:text-stone-300"
+            className="font-montserrat text-2xl font-bold tracking-wider text-secondary dark:text-stone-300 lg:text-3xl"
           >
             At-Tanwir
           </Link>
         </div>
-        <div className="hidden md:flex flex-row space-x-10 justify-center items-center">
+        <div className="hidden flex-row items-center justify-center space-x-10 md:flex">
           {links.map((link, i) => {
             const isActive = location.pathname === `/${link.toLowerCase()}`;
             return (
               <Link
                 key={i}
                 to={`/${link.toLowerCase()}`}
-                className={isActive ? "link-active" : "link"}
+                className={
+                  isActive
+                    ? `link-active ${!scrolled ? "text-[#588157] after:border-[#588157]" : ""}`
+                    : "link"
+                }
               >
                 {link}
               </Link>
@@ -63,10 +85,10 @@ function Navbar() {
           })}
           <ThemeBtn />
         </div>
-        <div className="md:hidden flex flex-row gap-3">
+        <div className="flex flex-row gap-3 md:hidden">
           <MenuBtn onClick={() => setShowMenu(!showMenu)} showMenu={showMenu} />
           <div
-            className={`menu absolute top-16 left-0 right-0   text-light transition-transform duration-200 ease-in-out origin-top  ${
+            className={`menu absolute left-0 right-0 top-16 origin-top text-light transition-transform duration-200 ease-in-out ${
               showMenu ? "" : "scale-y-0"
             }`}
           >
@@ -74,7 +96,7 @@ function Navbar() {
               <Link
                 key={i}
                 to={`/${link.toLowerCase()}`}
-                className="py-5 block font-semibold border-t-2 border-quaternary px-5 bg-primary dark:bg-tertiary hover:text-neutral-400 hover:bg-tertiary dark:hover:text-stone-700 dark:hover:bg-quaternary dark:border-[#293D33]"
+                className="block border-t-2 border-quaternary bg-primary px-5 py-5 font-semibold hover:bg-tertiary hover:text-neutral-400 dark:border-[#293D33] dark:bg-tertiary dark:hover:bg-quaternary dark:hover:text-stone-700"
               >
                 {link}
               </Link>
