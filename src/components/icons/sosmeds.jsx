@@ -1,4 +1,4 @@
-export function Instagram() {
+export function Instagram(i) {
   return (
     <svg
       className="h-6 w-6 text-stone-400 dark:text-white"
@@ -8,6 +8,7 @@ export function Instagram() {
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      key={i}
     >
       <path
         fill="currentColor"
@@ -19,7 +20,7 @@ export function Instagram() {
   );
 }
 
-export function Youtube() {
+export function Youtube(i) {
   return (
     <svg
       className="h-6 w-6 text-stone-400 dark:text-white"
@@ -29,6 +30,7 @@ export function Youtube() {
       height="24"
       fill="currentColor"
       viewBox="0 0 24 24"
+      key={i}
     >
       <path
         fillRule="evenodd"
@@ -39,7 +41,7 @@ export function Youtube() {
   );
 }
 
-export function Facebook() {
+export function Facebook(i) {
   return (
     <svg
       className="h-6 w-6 text-stone-400 dark:text-white"
@@ -49,6 +51,7 @@ export function Facebook() {
       height="24"
       fill="currentColor"
       viewBox="0 0 24 24"
+      key={i}
     >
       <path
         fillRule="evenodd"

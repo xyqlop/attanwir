@@ -3,6 +3,8 @@ import ThemeBtn from "../buttons/ThemeBtn";
 import { useEffect, useState } from "react";
 import MenuBtn from "../buttons/MenuBtn";
 import logo from "../../assets/logo.png";
+import { navigation } from "../../assets/data";
+import classFilter from "../../utils/classFilter";
 
 function Navbar() {
   const location = useLocation();
@@ -23,8 +25,12 @@ function Navbar() {
   useEffect(() => {
     if (showMenu) {
       window.addEventListener("click", handleClickOutside);
-    } else {
+      setScrolled(true);
+    } else if (!showMenu && !window.scrollY > 50) {
       window.removeEventListener("click", handleClickOutside);
+      setScrolled(false);
+    } else if (window.scrollY < 50) {
+      setScrolled(false);
     }
 
     return () => {
@@ -33,13 +39,11 @@ function Navbar() {
   }, [showMenu]);
 
   useEffect(() => {
-    location.pathname !== "/beranda" && setScrolled(true);
+    location.pathname !== "/" && setScrolled(true);
   }, []);
 
-  console.log(location.pathname == "/beranda");
-
   window.onscroll = () => {
-    if (location.pathname !== "/beranda") {
+    if (location.pathname !== "/") {
       setScrolled(true);
     } else if (window.scrollY > 50 || showMenu) {
       setScrolled(true);
@@ -61,25 +65,25 @@ function Navbar() {
           </div>
           <Link
             to="/"
-            className="font-montserrat text-2xl font-bold tracking-wider text-secondary dark:text-stone-300 lg:text-3xl"
+            className="font-montserrat text-2xl font-bold tracking-tight text-secondary dark:text-stone-300 lg:text-3xl"
           >
             At-Tanwir
           </Link>
         </div>
         <div className="hidden flex-row items-center justify-center space-x-10 md:flex">
-          {links.map((link, i) => {
-            const isActive = location.pathname === `/${link.toLowerCase()}`;
+          {navigation.map((nav) => {
+            const isActive = location.pathname === nav.href;
             return (
               <Link
-                key={i}
-                to={`/${link.toLowerCase()}`}
-                className={
+                key={nav.name}
+                to={nav.href}
+                className={classFilter(
                   isActive
                     ? `link-active ${!scrolled ? "text-[#588157] after:border-[#588157]" : ""}`
-                    : "link"
-                }
+                    : "link",
+                )}
               >
-                {link}
+                {nav.name}
               </Link>
             );
           })}
@@ -88,19 +92,22 @@ function Navbar() {
         <div className="flex flex-row gap-3 md:hidden">
           <MenuBtn onClick={() => setShowMenu(!showMenu)} showMenu={showMenu} />
           <div
-            className={`menu absolute left-0 right-0 top-16 origin-top text-light transition-transform duration-200 ease-in-out ${
+            className={`menu absolute left-0 right-0 top-16 origin-top text-light transition-transform duration-500 ease-in-out ${
               showMenu ? "" : "scale-y-0"
             }`}
           >
-            {links.map((link, i) => (
-              <Link
-                key={i}
-                to={`/${link.toLowerCase()}`}
-                className="block border-t-2 border-quaternary bg-primary px-5 py-5 font-semibold hover:bg-tertiary hover:text-neutral-400 dark:border-[#293D33] dark:bg-tertiary dark:hover:bg-quaternary dark:hover:text-stone-700"
-              >
-                {link}
-              </Link>
-            ))}
+            {links.map((link, i) => {
+              const notHome = link !== "Beranda";
+              return (
+                <Link
+                  key={i}
+                  to={notHome ? `/${link.toLowerCase()}` : "/"}
+                  className="block border-t-2 border-quaternary bg-primary px-5 py-5 font-semibold hover:bg-tertiary hover:text-neutral-400 dark:border-[#293D33] dark:bg-tertiary dark:hover:bg-quaternary dark:hover:text-stone-700"
+                >
+                  {link}
+                </Link>
+              );
+            })}
           </div>
           <ThemeBtn />
         </div>

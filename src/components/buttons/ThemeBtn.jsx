@@ -15,7 +15,6 @@ function ThemeBtn({ className = "" }) {
 
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
-    console.log(darkMode);
   }, [darkMode]);
   return (
     <button

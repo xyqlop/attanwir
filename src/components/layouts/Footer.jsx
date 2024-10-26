@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Youtube, Github } from "../icons/sosmeds";
+import { sosmed, navigation } from "../../assets/data.js";
 
 function Footer() {
-  const links = ["Beranda", "Tentang", "Galeri", "Kontak"];
   const sosmeds = [Instagram, Facebook, Youtube];
-  const sosmedNames = ["Instagram", "Facebook", "Youtube"];
-  const sosmedLinks = [
-    "https://instagram.com/media._attanwir",
-    "https://facebook.com/ponpes.tanwir",
-    "https://youtube.com/@attanwirmedia2739",
-  ];
 
   return (
     <footer>
@@ -19,13 +13,14 @@ function Footer() {
             <p className="mb-3 text-xl font-bold text-stone-300 md:text-lg">
               Navigasi
             </p>
-            {links.map((link, i) => (
-              <div key={i}>
+
+            {navigation.map((nav) => (
+              <div key={nav.name}>
                 <Link
-                  to={"/" + link.toLowerCase()}
+                  to={nav.href}
                   className="mb-1 inline-block duration-0 hover:text-light hover:underline"
                 >
-                  {link}
+                  {nav.name}
                 </Link>
                 <br />
               </div>
@@ -35,14 +30,15 @@ function Footer() {
             <p className="mb-3 text-xl font-bold text-stone-300 md:text-lg">
               Sosmed
             </p>
-            {sosmeds.map((sosmed, i) => (
-              <div key={i}>
+
+            {sosmeds.map((svg, i) => (
+              <div key={sosmed[i].name}>
                 <a
-                  href={sosmedLinks[i]}
+                  href={sosmed[i].href}
                   className="inline-flex gap-2 duration-0 hover:text-light hover:underline md:-ml-8"
                   target="_blank"
                 >
-                  {[sosmed(), sosmedNames[i]]}
+                  {[svg(i), sosmed[i].name]}
                 </a>
                 <br />
               </div>

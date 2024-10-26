@@ -25,7 +25,7 @@
     @apply flex items-center justify-center rounded-full bg-[#18392A] bg-opacity-0 p-1 hover:bg-opacity-50;
   }
   .header-underline::after {
-    @apply mt-10 block scale-x-50 rounded-full border-b-4 border-primary content-[""] dark:border-light;
+    @apply mt-5 block scale-x-50 rounded-full border-b-2 border-primary content-[""] dark:border-light sm:scale-x-[30%] md:scale-x-[15%];
   }
   html {
     @apply scroll-smooth;
